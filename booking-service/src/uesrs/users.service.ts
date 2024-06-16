@@ -19,7 +19,7 @@ export class UserService {
     });
   }
 
-  async getUser(@Param('id') param)) {
+  async getUser(@Param('id') param) {
     this.userRepository.find(param);
   }
   

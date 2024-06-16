@@ -21,7 +21,7 @@ export class UserController {
   // delete a user : after serving
   @Delete(':id')
   async serveUser() {
-    this.userService.serveUser();
+    return this.userService.serveUser();
   }
   //
 }
