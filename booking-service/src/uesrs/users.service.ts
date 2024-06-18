@@ -1,27 +1,17 @@
-import { Body, Injectable, Param } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
+import { Body, Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
 import { CreateUserDto } from 'src/dto/user.dto';
-import { User } from 'src/entities/user.entity';
-import { Repository } from 'typeorm';
+import { User } from 'src/schemas/user.schema';
 
 @Injectable()
 export class UserService {
   constructor(
-    @InjectRepository(User) private userRepository: Repository<User>,
+    @InjectModel(User.name, 'users') private userModel: Model<User>,
   ) {}
 
   async bookUser(@Body() createUserDto: CreateUserDto) {
-    this.userRepository.create({
-      id: createUserDto.ID,
-      priority: createUserDto.priority,
-      name: createUserDto.name,
-    });
-  }
-
-  async getUser(@Param() param) {
-    this.userRepository.findOneBy({ id: param.id });
-  }
-  async serveUser(@Param() param) {
-    this.userRepository.delete({ id: param.id });
+    const createdUser = new this.userModel(createUserDto);
+    return createdUser.save();
   }
 }

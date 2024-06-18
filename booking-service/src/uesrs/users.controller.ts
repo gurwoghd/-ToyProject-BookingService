@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Get, Param, Delete } from '@nestjs/common';
+import { Controller, Post, Body } from '@nestjs/common';
 import { UserService } from './users.service';
 import { CreateUserDto } from 'src/dto/user.dto';
 
@@ -12,16 +12,16 @@ export class UserController {
     return this.userService.bookUser(createUserDto);
   }
 
-  // get booked users
-  @Get(':id')
-  async getUser(@Param('id') param) {
-    return this.userService.getUser(param);
-  }
+  // // get booked users
+  // @Get(':id')
+  // async getUser(@Param('id') param) {
+  //   return this.userService.getUser(param);
+  // }
 
-  // delete a user : after serving
-  @Delete(':id')
-  async serveUser(@Param() param) {
-    return this.userService.serveUser(param);
-  }
-  //
+  // // delete a user : after serving
+  // @Delete(':id')
+  // async serveUser(@Param() param) {
+  //   return this.userService.serveUser(param);
+  // }
+  // //
 }
