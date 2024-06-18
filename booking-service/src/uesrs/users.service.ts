@@ -1,6 +1,5 @@
-import { Body, Injectable } from '@nestjs/common';
+import { Body, Injectable, Param } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { create } from 'domain';
 import { CreateUserDto } from 'src/dto/user.dto';
 import { User } from 'src/entities/user.entity';
 import { Repository } from 'typeorm';
@@ -19,12 +18,10 @@ export class UserService {
     });
   }
 
-  async getUser(@Param('id') param) {
-    this.userRepository.find(param);
+  async getUser(@Param() param) {
+    this.userRepository.findOneBy({ id: param.id });
   }
-  
-  async serveUser() {
-
+  async serveUser(@Param() param) {
+    this.userRepository.delete({ id: param.id });
   }
 }
-

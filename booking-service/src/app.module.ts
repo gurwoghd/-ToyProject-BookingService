@@ -9,7 +9,7 @@ import { User } from './entities/user.entity';
     TypeOrmModule.forRoot({
       type: 'mongodb',
       host: 'localhost',
-      port: '',
+      port: 27017,
       username: 'root',
       password: 'root',
       database: 'test',
